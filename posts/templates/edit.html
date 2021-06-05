@@ -1,4 +1,4 @@
-{% extends "tweets.html" %}
+{% extends "posts.html" %}
 {% load static %}
 {% load cloudinary %}
 {% block content %}
@@ -19,7 +19,7 @@
             </div>
     
             <div class="input-area">
-                <form action="/edit/{{ tweet.id }}" method="POST" enctype="multipart/form-data">
+                <form action="/" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     <div>
@@ -27,7 +27,7 @@
                     </div>
     
                     <div>
-                        <textarea name="text" maxlength="280" rows="4" cols="60" value="{{ tweet.text }}">{{ tweet.text }}</textarea>
+                        <textarea name="text" maxlength="280" rows="4" cols="60" value="{{ tweet.text }}">{{ tweet.body }}</textarea>
                     </div>
 
                     {% if tweet.image is not Null %}

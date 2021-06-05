@@ -14,6 +14,7 @@ from cloudinary.forms import cl_init_js_callbacks
 # Create your views here.
 
 def index(request):
+    form = PostForm()
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -22,7 +23,7 @@ def index(request):
         else:
             return HttpResponseRedirect(form.errors.as_json())
 
-    posts = Post.objects.order_by('created_at').reverse().all()[:20]
+    posts = Post.objects.all().order_by('-created_at')
     # Tweet.objects.order_by('created_at').reverse().all()[:20]
 
     return render(request, 'posts.html', 
@@ -34,7 +35,7 @@ def delete(request, post_id):
     
 def edit(request, post_id):
      post = Post.objects.get(id = post_id)
-     print(post)
+     form = PostForm(instance=post)
      if request.method == 'POST':
          form = PostForm(request.POST, request.FILES, instance=post)
          if form.is_valid():
@@ -42,11 +43,9 @@ def edit(request, post_id):
              return HttpResponseRedirect('/')
          else:
              return HttpResponseRedirect(form.errors.as_json())
-     else:
     # Show editting screen
-        form = PostForm
-        return render(request, 'edit.html',
-        {'post': post, 'form': form})
+     return render(request, 'edit.html',
+        {'tweet':post, 'form':form})
 
 
 def postLikeAdd(request,post_id):
