@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -130,6 +130,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+django_heroku.settings(locals())
 
 cloudinary.config( 
   cloud_name = "dumu78x6g", 
