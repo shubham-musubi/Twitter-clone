@@ -1,13 +1,14 @@
 
 from django import forms
-from .models import Post 
+from .models import Post
+
 
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Post 
+        model = Post
         fields = '__all__'
 
 # class UpdateForm(forms.ModelForm):
 #     class Meta:
-#         model = Post 
-#         fields = '__all__'
+#         model = Post
+#         fields = '['name', 'body', 'image']'
